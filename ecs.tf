@@ -36,6 +36,18 @@ resource "aws_ecs_task_definition" "task" {
   }
 }
 
+resource "aws_ecs_task_definition" "task_temp" {
+  family                = "${var.service_identifier}-${var.task_identifier}"
+  container_definitions = "${data.template_file.container_definition.rendered}"
+  network_mode          = "${var.network_mode}"
+  task_role_arn         = "${aws_iam_role.task.arn}"
+
+  volume {
+    name      = "data"
+    host_path = "${var.ecs_data_volume_path}"
+  }
+}
+
 resource "aws_ecs_service" "service" {
   name                               = "${var.service_identifier}-${var.task_identifier}-service"
   cluster                            = "${var.ecs_cluster_arn}"
@@ -69,7 +81,7 @@ resource "aws_ecs_service" "service_temporary_workaround_binpack_to_spread" {
   count                              = "${var.ecs_desired_count_temporary_workaround_binpack_to_spread == 0 ? 0 : 1}"
   name                               = "${var.service_identifier}-${var.task_identifier}-service-temp-workaround-binpack-to-spread"
   cluster                            = "${var.ecs_cluster_arn}"
-  task_definition                    = "${aws_ecs_task_definition.task.arn}"
+  task_definition                    = "${aws_ecs_task_definition.task_temp.arn}"
   desired_count                      = "${var.ecs_desired_count_temporary_workaround_binpack_to_spread}"
   iam_role                           = "${aws_iam_role.service.arn}"
   deployment_maximum_percent         = "${var.ecs_deployment_maximum_percent}"
