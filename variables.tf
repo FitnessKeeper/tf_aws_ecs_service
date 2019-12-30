@@ -61,7 +61,7 @@ variable "docker_memory_reservation" {
 }
 
 variable "docker_port_mappings" {
-  type        = list(string)
+  type        = list
   description = "List of port mapping maps of format { \"containerPort\" = integer, [ \"hostPort\" = integer, \"protocol\" = \"tcp or udp\" ] }"
   default     = []
 }
