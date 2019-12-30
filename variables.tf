@@ -61,7 +61,7 @@ variable "docker_memory_reservation" {
 }
 
 variable "docker_port_mappings" {
-  type        = list
+  type        = object({ name=string, value=number })
   description = "List of port mapping maps of format { \"containerPort\" = integer, [ \"hostPort\" = integer, \"protocol\" = \"tcp or udp\" ] }"
   default     = []
 }
@@ -78,7 +78,7 @@ variable "ecs_data_volume_path" {
 }
 
 variable "docker_environment" {
-  type        = list(string)
+  type        = object({ name=string, value=string })
   description = "List of environment maps of format { \"name\" = \"var_name\", \"value\" = \"var_value\" }"
   default     = []
 }
