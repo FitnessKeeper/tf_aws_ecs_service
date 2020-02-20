@@ -53,7 +53,7 @@ resource "aws_iam_role" "task" {
   assume_role_policy = data.aws_iam_policy_document.assume_role_task.json
 
   lifecycle {
-    ignore_changes = [name-prefix]
+    ignore_changes = [name_prefix]
   }
 }
 
@@ -63,7 +63,7 @@ resource "aws_iam_role_policy" "task" {
   policy = data.aws_iam_policy_document.task_policy.json
 
   lifecycle {
-    ignore_changes = [name-prefix]
+    ignore_changes = [name_prefix]
   }
 }
 
@@ -73,7 +73,7 @@ resource "aws_iam_role" "service" {
   assume_role_policy = data.aws_iam_policy_document.assume_role_service.json
 
   lifecycle {
-    ignore_changes = [name-prefix]
+    ignore_changes = [name_prefix]
   }
 }
 
