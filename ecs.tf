@@ -48,8 +48,8 @@ resource "aws_ecs_service" "service" {
   }
 
   ordered_placement_strategy {
-    type  = var.ecs_placement_strategy_type
     field = var.ecs_placement_strategy_field
+    type  = var.ecs_placement_strategy_type
   }
 
   load_balancer {

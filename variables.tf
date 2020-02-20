@@ -231,3 +231,15 @@ variable "alb_deregistration_delay" {
     description = "The amount of time in seconds to wait before deregistering a target from a target group."
     default     = "300"
 }
+
+variable "aws_iam_role_task_name_override" {
+  default == ""
+}
+
+variable "aws_iam_role_policy_task_name_override" {
+  default == ""
+}
+
+variable "aws_iam_role_service_name_override" {
+  default == ""
+}
