@@ -233,13 +233,13 @@ variable "alb_deregistration_delay" {
 }
 
 variable "aws_iam_role_task_name_override" {
-  default == ""
+  default = ""
 }
 
 variable "aws_iam_role_policy_task_name_override" {
-  default == ""
+  default = ""
 }
 
 variable "aws_iam_role_service_name_override" {
-  default == ""
+  default = ""
 }
