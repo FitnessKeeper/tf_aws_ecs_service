@@ -51,18 +51,30 @@ resource "aws_iam_role" "task" {
   name               = coalesce(var.aws_iam_role_task_name_override, "${var.service_identifier}-${var.task_identifier}-ecsTaskRole")
   path               = "/${var.service_identifier}/"
   assume_role_policy = data.aws_iam_policy_document.assume_role_task.json
+
+  lifecycle {
+    ignore_changes = [name-prefix]
+  }
 }
 
 resource "aws_iam_role_policy" "task" {
   name   = coalesce(var.aws_iam_role_policy_task_name_override, "${var.service_identifier}-${var.task_identifier}-ecsTaskPolicy")
   role   = aws_iam_role.task.name
   policy = data.aws_iam_policy_document.task_policy.json
+
+  lifecycle {
+    ignore_changes = [name-prefix]
+  }
 }
 
 resource "aws_iam_role" "service" {
   name               = coalesce(var.aws_iam_role_service_name_override, "${var.service_identifier}-${var.task_identifier}-ecsServiceRole")
   path               = "/${var.service_identifier}/"
   assume_role_policy = data.aws_iam_policy_document.assume_role_service.json
+
+  lifecycle {
+    ignore_changes = [name-prefix]
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "service" {
